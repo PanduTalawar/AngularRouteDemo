@@ -5,40 +5,32 @@ import { SleepDashboardComponent } from './sleep-calculators/sleep-dashboard/sle
 import { DaietryDashboardComponent } from './daietrya-calculator/daietry-dashboard/daietry-dashboard.component';
 import { ArmydashboardComponent } from './army-calculator/armydashboard/armydashboard.component';
 import { HeartRateDashboardComponent } from './heart-rate-calculator/heart-rate-dashboard/heart-rate-dashboard.component';
-import { BmiDashboardComponent } from './bmi-calculator/bmi-dashboard/bmi-dashboard.component';
-import { IndexCalcComponent } from './bmi-calculator/index-calc/index-calc.component';
-import { KidsCalcComponent } from './bmi-calculator/kids-calc/kids-calc.component';
-import { WeightLossCalcComponent } from './bmi-calculator/weight-loss-calc/weight-loss-calc.component';
 import { HomeComponent } from './home/home.component';
-
+import { canActivateTeam } from './route-guard/autenticateRouteGuard';
 const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 
-  {path:"",redirectTo:"home",pathMatch:"full"},
+  { path: 'home', component: HomeComponent },
 
-  { path:"home",component:HomeComponent},
-
-  { path:"health",component:MainCalculatorsDashboardComponent},
-
-  { path:"bmi",component:BmiDashboardComponent,
-     children:[
-      {path:"",component:IndexCalcComponent},
-      {path:"index",component:IndexCalcComponent},
-      {path:"kids",component:KidsCalcComponent},
-      {path:"weight",component:WeightLossCalcComponent}
-    ]
+  {
+    path: 'health',
+    component: MainCalculatorsDashboardComponent,
+    canActivate: [canActivateTeam],
   },
 
-  { path:"heart",component:HeartRateDashboardComponent},
+  { path:"bmi",loadChildren:() => import('./bmi-calculator/bmi-calculator.module').then(m=> m.BmiCalculatorModule)},
 
-  { path:"army",component:ArmydashboardComponent},
+  { path: 'heart', component: HeartRateDashboardComponent },
 
-  { path:"sleep",component:SleepDashboardComponent},
-  
-  { path:"dietry",component:DaietryDashboardComponent},
+  { path: 'army', component: ArmydashboardComponent },
+
+  { path: 'sleep', component: SleepDashboardComponent },
+
+  { path: 'dietry', component: DaietryDashboardComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommunicationService } from 'src/app/services/communication.service';
 
 @Component({
   selector: 'app-kids-calc',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class KidsCalcComponent {
 
+  constructor(public comService:CommunicationService){}
+
+  ngOnInit(): void {
+      this.comService.pulishMesg("Kids-Calculator");
+  }
 }

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { IndexCalcComponent } from './index-calc/index-calc.component';
 import { KidsCalcComponent } from './kids-calc/kids-calc.component';
 import { WeightLossCalcComponent } from './weight-loss-calc/weight-loss-calc.component';
+import { BmiRoutingModule } from './bmi-routing.module';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { WeightLossCalcComponent } from './weight-loss-calc/weight-loss-calc.com
   ],
   imports: [
     CommonModule,
-    RouterModule
+    BmiRoutingModule
   ],
   exports:[BmiDashboardComponent]
 })
